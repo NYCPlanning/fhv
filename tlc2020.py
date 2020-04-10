@@ -12,10 +12,11 @@ import shutil
 import os
 
 
+
 pd.set_option('display.max_columns', None)
 
-path='C:/Users/Yijun Ma/Desktop/D/DOCUMENT/DCP2020/TLC2019/'
-path='/home/mayijun/TLC2019/'
+path='C:/Users/Yijun Ma/Desktop/D/DOCUMENT/DCP2020/TLC2020/'
+#path='/home/mayijun/TLC2020/'
 
 
 
@@ -28,25 +29,6 @@ for i in range(0,300):
     file = open(path+'DATA/'+datetime.datetime.strftime(dl,'%y%m%d')+'.txt', "wb")
     shutil.copyfileobj(req,file)
     file.close()
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 
@@ -100,6 +82,22 @@ conn.close()
 
 
 print(datetime.datetime.now()-start)
+
+
+
+
+
+
+
+
+# Machine Learning
+df=pd.read_csv(path+'NTA/NTA.csv',dtype=float,converters={'nta':str})
+
+
+
+
+
+
 
 
 
