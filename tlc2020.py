@@ -88,13 +88,15 @@ print(datetime.datetime.now()-start)
 
 
 
-
+import pandas as pd
+from sklearn.cluster import KMeans
 
 # Machine Learning
 df=pd.read_csv(path+'NTA/NTA.csv',dtype=float,converters={'nta':str})
-
-
-
+kmeans=KMeans(n_clusters=5)
+y=kmeans.fit_predict(df[df.columns[1:]])
+df['cluster']=y
+df.to_csv(path+'NTA/NTACLUSTER.csv',index=False)
 
 
 
