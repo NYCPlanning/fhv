@@ -16,6 +16,7 @@ import os
 pd.set_option('display.max_columns', None)
 
 path='C:/Users/Yijun Ma/Desktop/D/DOCUMENT/DCP2020/TLC2020/'
+path='C:/Users/mayij/Desktop/DOC/DCP2020/TLC2020/'
 #path='/home/mayijun/TLC2020/'
 
 
@@ -90,13 +91,24 @@ print(datetime.datetime.now()-start)
 
 import pandas as pd
 from sklearn.cluster import KMeans
+import numpy as np
+import matplotlib.pyplot as plt
 
 # Machine Learning
 df=pd.read_csv(path+'NTA/NTA.csv',dtype=float,converters={'nta':str})
-kmeans=KMeans(n_clusters=5)
-y=kmeans.fit_predict(df[df.columns[1:]])
+dist=pd.DataFrame()
+dist['k']=range(1,10)
+dist['dist']=np.nan
+for k in range(1,10):
+    km=KMeans(n_clusters=k)
+    km=km.fit(df[df.columns[1:]])
+    dist.loc[dist['k']==k,'dist']=km.inertia_
+plt.plot(dist['k'],dist['dist'])
+k=4 # Elbow
+km=KMeans(n_clusters=k)
+y=km.fit_predict(df[df.columns[1:]])
 df['cluster']=y
-df.to_csv(path+'NTA/NTACLUSTER.csv',index=False)
+df.to_csv(path+'NTA/NTACLUSTER4.csv',index=False)
 
 
 
